@@ -2,8 +2,10 @@ const a1 = ['bici', 'coche', 'bici', 'bici', 'newGift']
 const a2 = ['coche', 'bici', 'muñeca', 'coche']
 const a3 = ['bici', 'pc', 'pc']
 
+// First solution: 10 points
+
 function getGiftsToReFill (a1, a2, a3) {
-  let reFill = []
+  let reFill = [];
   a1.forEach(gift => {
     let giftTofind = gift;
     const foundInA2 = a2.find(elemet => elemet === giftTofind);
@@ -35,6 +37,3 @@ function getGiftsToReFill (a1, a2, a3) {
   const uniqueGifts = [...new Set(reFill)]
   return uniqueGifts
 }
-
-let giftsToReFill = getGiftsToReFill(a1, a2, a3)
-console.log(giftsToReFill)
