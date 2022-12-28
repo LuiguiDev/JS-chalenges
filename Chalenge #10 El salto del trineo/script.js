@@ -1,7 +1,6 @@
 const heights = [1, 2, 3, 2] // true
 const heights2 = [2, 2, 2, 2] // false
 
-
 function checkJump(heights) {
   let status = false
   let higher
