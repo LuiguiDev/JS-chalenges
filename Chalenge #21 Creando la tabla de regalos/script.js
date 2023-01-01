@@ -5,71 +5,68 @@ const obj = [
 
 
 function printTable(gifts){
-  let longestString = 'Gift'.length
-  let longestNumber = 'Quantity'.length
-  let top = '+'
-  let bottom = '*'
-  let print = ''
+  let longestString = 'Gift'.length;
+  let longestNumber = 'Quantity'.length;
 
+  function createTable (gifts){
+    const decoration = `| ${'-'.repeat(longestString)} | ${'-'.repeat(longestNumber)} |\n`
+    const totalWidth = longestString + longestNumber + 7;
+
+    function createRows (left, right) {
+      const giftsRows = `${left}${' '.repeat(longestString - left.length)}`
+      const quantityRows = `${right}${' '.repeat(longestNumber - right.toString().length)}`
+
+      return `| ${giftsRows} | ${quantityRows} |\n`
+    };
+
+    const top = `${'+'.repeat(totalWidth)}\n`;
+    const titles = `${createRows('Gift', 'Quantity')}${decoration}`
+    let content = ''
+    const bottom = `${'*'.repeat(totalWidth)}`;
+
+    if(gifts != 'empty'){
+      gifts.forEach(element => {
+        content += createRows(element.name, element.quantity);
+      })
+    }else{
+      content = `| ${' '.repeat(longestString)} | ${' '.repeat(longestNumber)} |`
+    }
+
+    return `${top}${titles}${content}${bottom}` 
+  }
   // Check longest string & number
   if(gifts.length > 1){
     for (let i = 0; i < gifts.length - 1; i++) {
       const currentName = gifts[i].name.length;
       const nextName = gifts[i + 1].name.length;
-      const currentQ = gifts[i].quantity.toString().length;
-      const nextQ = gifts[i + 1].quantity.toString().length;
-  
-      // Check the longest string 
-      if (longestString <= currentName){
-        longestString = currentName
-        if (currentName <= nextName){
-          longestString = nextName
-        }else if(currentName > nextName){
-          longestString = currentName
-        }
-      }else if (longestString <= nextName){
-        longestString = nextName
-      }
+      const currentNumber = gifts[i].quantity.toString().length;
+      const nextNumber = gifts[i + 1].quantity.toString().length;
+
+      if (longestString < currentName){
+        longestString = currentName;
+        if (currentName < nextName) longestString = nextName;
+      }else if (longestString < nextName) longestString = nextName;
       // Check the longest number
-      if (longestNumber <= currentQ){
-        longestNumber = currentQ
-        if (currentQ <= nextQ){
-          longestNumber = nextQ
-        }
-      }else if (longestNumber < nextQ){
-        longestNumber = nextQ
-      }
+      if (longestNumber < currentNumber){
+        longestNumber = currentNumber
+        if (currentNumber <= nextNumber) longestNumber = nextNumber;
+      }else if (longestNumber < nextNumber) longestNumber = nextNumber;
     }
+    return createTable(gifts);
+  }else if(gifts.length === 1) {
+    const currentName = gifts[0].name.length;
+    const currentNumber = gifts[0].quantity.toString().length;
+
+    if(currentName > longestString) longestString = currentName;
+    if(currentNumber > longestNumber) longestNumber = currentNumber;
+
+    return createTable(gifts)
   }else{
-    if(gifts[0].name.length > longestString){
-      longestString = gifts[0].name.length
-    }
-    if(gifts[0].quantity.toString().length > longestNumber){
-      longestNumber = gifts[0].quantity.toString().length
-    }
+    return createTable('empty');
   }
-
-  print += `++++${top.repeat(longestString + longestNumber)}+++\n`
-  print += `| Gift${' '.repeat(longestString - 'Gift'.length)} | Quantity${' '.repeat(longestNumber - 'Quantity'.length)} |\n`
-  print += `| ${'-'.repeat(longestString)} | ${'-'.repeat(longestNumber)} |\n`
-
-  gifts.forEach(element => {
-    let name = element.name;
-    let number = element.quantity;
-    print += `| ${name}${' '.repeat(longestString - name.length)} | ${number}${' '.repeat(longestNumber - number.toString().length)} |\n`    
-  });
-  print += `****${bottom.repeat(longestString + longestNumber)}***`
-  
-  return print
 }
-// exprected:
-/* 
-+++++++++++++++++++
-| Gift | Quantity |
-| ---- | -------- |
-| Game | 2        |
-| Bike | 1        |
-| Book | 3        |
-*******************
-*/
-console.log(printTable(obj))
+
+console.log(printTable([
+  { name: 'Toy', quantity: 12 },
+  { name: 'Mic', quantity: 123 }
+]))
