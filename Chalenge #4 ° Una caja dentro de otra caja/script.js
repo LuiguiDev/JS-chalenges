@@ -3,12 +3,12 @@ const boxes = [
   { l: 3, w: 3, h: 3 },
   { l: 2, w: 2, h: 2 },
   { l: 2, w: 4, h: 1 }
-];
-/* const boxes = [
+];  
+const boxes2 = [
   { l: 1, w: 1, h: 1 },
   { l: 3, w: 3, h: 3 },
   { l: 2, w: 2, h: 2 }
-] */
+]
 
 function fitsInOneBox(boxes) {
   let boxesSotrted = []
@@ -34,5 +34,25 @@ function fitsInOneBox(boxes) {
   return status
 }
 
-let state = fitsInOneBox(boxes)
-console.log(state)
+function fits(boxes) {
+  let status
+  let sorted = boxes.sort((a, b) => a.w - b.w)
+
+  for (let i = 0; i < sorted.length - 1; i++) {
+    const length = sorted[i]['l'];
+    const heigth = sorted[i]['h'];
+    const nextL = sorted[i + 1]['l']
+    const nextH = sorted[i + 1]['h']
+    
+    if(length >= nextL || heigth >= nextH){
+      status = false
+      break;
+    }else{
+      status = true
+    }
+  }
+
+  return status
+}
+let result = fits(boxes2)
+console.log(result)
