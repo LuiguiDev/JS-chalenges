@@ -54,5 +54,5 @@ function fits(boxes) {
 
   return status
 }
-let result = fits(boxes2)
+let result = fits(boxes)
 console.log(result)
