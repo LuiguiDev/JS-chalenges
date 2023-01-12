@@ -7,7 +7,6 @@ function dryNumber(dry, numbers) {
     if(digits.includes(string)){
       fails.push(i)
     }
-    console.log(fails)
   }
   return fails
 }
