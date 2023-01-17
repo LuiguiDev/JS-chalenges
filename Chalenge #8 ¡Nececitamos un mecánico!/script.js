@@ -34,4 +34,27 @@ function checkPart(part) {
   return status
 }
 
-console.log(checkPart('dhannahdd'))
+function check(part) {
+  const reverse = part.split('').reverse().join('');
+  const partArr = part.split('');
+  const reverseArr = reverse.split('')
+  let different
+
+  for (let i = 0; i < partArr.length; i++) {
+    if(i < partArr.length / 2){
+      const index = partArr.findIndex((element, index) => {
+        return element != reverseArr[index]
+      })
+      if(index != -1) different = partArr[index]
+      console.log(different)
+    }else{
+      const indexS = reverseArr.findIndex((element, index) => {
+        return element != partArr[index]
+      })
+      if(indexS != -1) different = reverseArr[indexS]
+    }
+  }
+  return different
+}
+
+console.log(check('hannahz'))
