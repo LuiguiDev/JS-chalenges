@@ -1,0 +1,28 @@
+body {
+  background-color: rgb(23, 22, 22);
+  color: white;
+}
+form{
+  max-width: 90vw;
+  display: grid;
+  grid-template-columns: repeat(6, 100px);
+  gap: 15px;
+}
+.dial{
+  display: flex;
+  flex-direction: column;
+}
+input, select, .display {
+  height: 30px;
+  font-family: 'DS-Digital';
+  font-weight: bold;
+}
+
+label, .label {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(213, 43, 43);
+  font-family: arial;
+  font-size: 10px;
+  padding: 5px 0;
+}

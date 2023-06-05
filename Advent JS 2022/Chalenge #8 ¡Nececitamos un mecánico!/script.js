@@ -57,4 +57,36 @@ function check(part) {
   return different
 }
 
-console.log(check('hannahz'))
+function third (part) {
+  if (part.length <= 1) return true;
+
+  const partCopy = part.split('').reverse().join('')
+
+  if (partCopy === part) return true
+
+  if (part.length <= 2) {
+    return false
+  }else {
+    let result 
+    for (let i = 0; i < part.length; i++) {
+      const character = partCopy[i]
+  
+      if (character != part[i]) {
+        let test1 = partCopy.split(character).join('')
+        let test2 = part.split(part[i]).join('')
+  
+        if (test1 === test1.split('').reverse().join('')) {
+          result = true
+        }else if (test2 === test2.split('').reverse().join('')){
+          result = true
+        } else {
+          result = false
+        }
+      } 
+    }
+    return result
+  }
+}
+
+const result = third('non')
+console.log(result)

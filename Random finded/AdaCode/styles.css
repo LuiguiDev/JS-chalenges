@@ -1,0 +1,10 @@
+body {
+  background-color: rgb(17, 16, 16);
+  color: white;
+}
+
+.color {
+  height: 50px;
+  width: 50px;
+  background-color: #0D3764;
+}

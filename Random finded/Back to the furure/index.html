@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Document</title>
+</head>
+<body onload="createMonthOptions()">
+  <main>
+    <h2>Present time</h2>
+    <form id="present">
+      <div class="dial month present">
+        <p class="display" id="Current_Month"></p>
+        <p class="label">MONTH</p>
+      </div>
+      <div class="dial day present">
+        <p class="display" id="Current_Day"></p>
+        <p class="label">DAY</p>
+      </div>
+      <div class="dial year present">
+        <p class="display" id="Current_Year"></p>
+        <p class="label">YEAR</p>
+      </div>
+      <div class="dial hour present">
+        <p class="display" id="Current_Hour"></p>
+        <p class="label">HOUR</p>
+      </div>
+      <div class="dial minute present">
+        <p class="display" id="Current_Minute"></p>
+        <p class="label">MINUTE</p>
+      </div>
+    </form>
+    <h2>Destination time</h2>
+    <form id="presentTimeForm">
+      <div class="dial month present">
+        <select id="month">
+          <!-- options will be genereted with js -->
+        </select>
+        <label for="month">MONTH</label>
+      </div>
+
+      <div class="dial day present">
+        <input
+        type="number"
+        min="1"
+        max="31"
+        placeholder="Ex: 01"
+        id="day">
+        <label for="day">DAY</label>
+      </div>
+
+      <div class="dial year present">
+        <input 
+          type="number"
+          min="1900"
+          max="2300"
+          placeholder="Ex: 1985"
+          id="year">
+        <label for="year">YEAR</label>
+      </div>
+
+      <div class="dial hour present">
+        <input
+          type="number"
+          min="00"
+          max="24"
+          placeholder="Ex: 23"
+          id="hour">
+        <label for="hour">HOUR</label>
+      </div>
+
+      <div class="dial minite present">
+        <input
+          type="number"
+          min="0"
+          max="60"
+          placeholder="Ex: 59"
+          id="minute">
+        <label for="minute">MINUTE</label>
+      </div>
+
+      <button type="submit">Save</button>
+    </form>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

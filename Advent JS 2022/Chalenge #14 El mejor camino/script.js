@@ -63,5 +63,9 @@ function optimalPath(roads) {
   let shortest = Math.min(sumF, sumS)
   console.log(`The shortest way is ${shortest}`)
 }
-
-optimalPath(roads)
+function anotherTry(roads) {
+  roads.forEach(level => {
+    console.log(level)
+  })
+}
+anotherTry(roads)
