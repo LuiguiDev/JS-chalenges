@@ -5,10 +5,51 @@ const yearElement = document.getElementById('Current_Year')
 const hourElement = document.getElementById('Current_Hour')
 const minuteElement = document.getElementById('Current_Minute')
 
-const presentTimeForm = document.getElementById('presentTimeForm')
-presentTimeForm.addEventListener('submit',(e) => manageSubmit(e))
+let currentMonth
+let currentDay
+let currentYear
+let currentHour
+let currentMinute
 
-function manageSubmit (e) { 
+const destinationTimeForm = document.getElementById('destinationTimeForm')
+destinationTimeForm.addEventListener('submit',(e) => checkTimeTravel(e))
+
+function checkTimeTravel (e) {
+  e.preventDefault()
+
+  const presentDateOnDisplay = {
+    month: months.findIndex(month => month === monthElement.textContent),
+    day: dayElement.textContent,
+    year: yearElement.textContent,
+    hour: hourElement.textContent,
+    minute: minuteElement.textContent
+  }
+  const {month, day, year, hour, minute} = presentDateOnDisplay
+
+  const newMonth = months.findIndex(month => month === e.target[0].value)
+  const newDay = e.target[1].value
+  const newYear = e.target[2].value
+  const newHour = e.target[3].value
+  const newMinute = e.target[4].value
+
+  const destinationDate = new Date(newYear, newMonth, newDay, newHour, newMinute)
+  const presentDate = new Date(year, month, day, hour, minute)
+  const timeTraveled = (destinationDate - presentDate) / (1000 * 60 * 60 * 24)
+  const movingForwards = timeTraveled > 0
+
+  writeMoveInDays(movingForwards, timeTraveled)
+}
+
+function writeMoveInDays (movingForwards, timeTraveled) {
+  const text = movingForwards ? 'to the future' : 'to the past'
+  const textCointainer = document.getElementById('counter')
+
+  timeTraveled = Math.abs(timeTraveled)
+
+  textCointainer.textContent = `You are going to move ${timeTraveled} days ${text}`
+}
+
+function manageSubmit (e) {
   e.preventDefault()
 
   const newMonth = e.target[0].value
@@ -23,21 +64,20 @@ function manageSubmit (e) {
   hourElement.textContent = newHour
   minuteElement.textContent = newMinute
 }
-
-function getDate () {
+function getCurrentDate () {
   const date = new Date()
 
-  const month = months[date.getMonth()]
-  const day = date.getDate()
-  const year = date.getFullYear()
-  const hour = date.getHours()
-  const minute = date.getMinutes()
+  currentMonth = months[date.getMonth()]
+  currentDay = date.getDate()
+  currentYear = date.getFullYear()
+  currentHour = date.getHours()
+  currentMinute = date.getMinutes()
 
-  monthElement.textContent = month
-  dayElement.textContent = day
-  yearElement.textContent = year
-  hourElement.textContent = hour
-  minuteElement.textContent = minute
+  monthElement.textContent = currentMonth
+  dayElement.textContent = currentDay
+  yearElement.textContent = currentYear
+  hourElement.textContent = currentHour
+  minuteElement.textContent = currentMinute
 }
 
 function createMonthOptions () {
@@ -52,4 +92,4 @@ function createMonthOptions () {
   }
 }
 
-getDate()
+getCurrentDate()
