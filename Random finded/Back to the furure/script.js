@@ -34,19 +34,48 @@ function checkTimeTravel (e) {
 
   const destinationDate = new Date(newYear, newMonth, newDay, newHour, newMinute)
   const presentDate = new Date(year, month, day, hour, minute)
-  const timeTraveled = (destinationDate - presentDate) / (1000 * 60 * 60 * 24)
-  const movingForwards = timeTraveled > 0
+  const timeTraveledMin = (destinationDate - presentDate) / (1000 * 60)
+  const movingForwards = timeTraveledMin > 0
 
-  writeMoveInDays(movingForwards, timeTraveled)
+  writeMoveInDays(movingForwards, timeTraveledMin)
 }
 
-function writeMoveInDays (movingForwards, timeTraveled) {
-  const text = movingForwards ? 'to the future' : 'to the past'
+function writeMoveInDays (movingForwards, timeTraveledMin) {
+  const pastOrFuture = movingForwards ? 'to the future' : 'to the past'
   const textCointainer = document.getElementById('counter')
+  timeTraveledMin = Math.abs(timeTraveledMin)
 
-  timeTraveled = Math.abs(timeTraveled)
+  let years = ''
+  let days = ''
+  let minutes = timeTraveledMin
+  let hours = ''
 
-  textCointainer.textContent = `You are going to move ${timeTraveled} days ${text}`
+  if (timeTraveledMin >= 60) {
+    hours = timeTraveledMin / 60
+    minutes = 60 * (hours % 1)
+  }
+  if (hours >= 24) {
+    days = hours / 24
+    hours = 24 * (days % 1)
+  }
+  if (days >= 365) {
+    years = days / 365
+    days = 356 * (years % 1)
+  }
+
+  function clearNumber (number, unit) {
+    number = Math.floor(number)
+    if (number === 0) return ''
+    if (number === 1) return `${number} ${unit}`
+    else return `${number} ${unit}s`
+  }
+
+  years = clearNumber(years, 'year')
+  days = clearNumber(days, 'day')
+  hours = clearNumber(hours, 'hour')
+  minutes = clearNumber(minutes, 'minute')
+
+  textCointainer.textContent = `You are going to move ${years} ${days} ${hours} ${minutes} ${pastOrFuture}`
 }
 
 function manageSubmit (e) {
